@@ -4,8 +4,10 @@ use components\core\PageMenu\Footer;
 use components\core\PageMenu\Header;
 use components\Home\Home;
 use core\sideloader\importers\Css\Css;
+use core\sideloader\importers\Javascript\Javascript;
 
 Css::import($this->getResource('home.css'));
+Javascript::import($this->getResource('home.js'));
 
 $docsLink = $this->createDocsLink();
 $projectLink = $this->getProjectLink();
@@ -13,105 +15,106 @@ $projectName = $this->getProjectName();
 
 ?><?= Header::default() ?>
 
-<main class="home-landing page-container">
-    <div class="home-container">
-        <div class="home-hero">
-            <h1><?= $this->tr('Build full-stack apps without fighting your framework') ?></h1>
-
-            <p class="home-subtitle">
-                <?= $this->tr('RouteChasm is a developer-first PHP framework focused on clarity, flexibility, and control - not magic, not bloat.') ?>
+<main class="home page-container">
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Strata</h1>
+            <p class="subtitle">
+                A structured software system for building, managing, and evolving modern web applications.
             </p>
 
-            <div class="home-actions">
-                <?php if (!is_null($projectLink)): ?>
-                    <a href="<?= $projectLink ?>" class="button">
-                        <?= $this->tr('Start Building with') ?>
-                        <?= $projectName ?>
-                    </a>
-                <?php endif; ?>
-
-                <?php if (!is_null($docsLink)): ?>
-                    <a href="<?= $docsLink ?>" class="button">
-                        <?= $this->tr('View Documentation') ?>
-                    </a>
-                <?php endif; ?>
-            </div>
-
-            <div class="home-bullets">
-                <span><?= $this->tr('Minimal setup') ?></span>
-                <span><?= $this->tr('Full control') ?></span>
-                <span><?= $this->tr('No hidden behavior') ?></span>
+            <div class="hero-actions">
+                <button class="btn primary" onclick="scrollToSection('features')">
+                    Explore Features
+                </button>
+                <button class="btn secondary" onclick="scrollToSection('architecture')">
+                    View Architecture
+                </button>
             </div>
         </div>
+    </section>
 
-        <div class="home-section">
-            <h2><?= $this->tr('Designed for control, not convention lock-in') ?></h2>
-            <p>
-                <?= $this->tr('Most frameworks push rigid patterns early. RouteChasm doesn’t. You start simple - and stay in control as complexity grows.') ?>
-            </p>
-        </div>
+    <section id="features" class="section">
+        <h2>Core Capabilities</h2>
 
-        <div class="home-grid">
-            <div class="home-card">
-                <h3><?= $this->tr('Modular by default') ?></h3>
-                <p><?= $this->tr('Every part of your application is composable and replaceable.') ?></p>
-                <ul>
-                    <li><?= $this->tr('Swap logic without rewrites') ?></li>
-                    <li><?= $this->tr('Build only what you need') ?></li>
-                    <li><?= $this->tr('Explicit dependencies') ?></li>
-                </ul>
+        <div class="grid">
+            <div class="card">
+                <h3>Modular Structure</h3>
+                <p>Everything is built from reusable components and predictable patterns.</p>
             </div>
 
-            <div class="home-card">
-                <h3><?= $this->tr('Database interaction that makes sense') ?></h3>
-                <p><?= $this->tr('Work with your data without ORM friction.') ?></p>
-                <ul>
-                    <li><?= $this->tr('Simple CRUD out of the box') ?></li>
-                    <li><?= $this->tr('Easy overrides') ?></li>
-                    <li><?= $this->tr('Clear mapping to database') ?></li>
-                </ul>
+            <div class="card">
+                <h3>Content System</h3>
+                <p>Supports static, dynamic, and template-driven content types.</p>
             </div>
 
-            <div class="home-card">
-                <h3><?= $this->tr('Flexible form handling') ?></h3>
-                <p><?= $this->tr('Forms adapt to your needs, not the other way around.') ?></p>
-                <ul>
-                    <li><?= $this->tr('Custom labeling & mapping') ?></li>
-                    <li><?= $this->tr('Unified configuration') ?></li>
-                    <li><?= $this->tr('No scattered overrides') ?></li>
-                </ul>
+            <div class="card">
+                <h3>Backend Integration</h3>
+                <p>Clean separation between data, logic, and presentation layers.</p>
             </div>
 
-            <div class="home-card">
-                <h3><?= $this->tr('Predictable architecture') ?></h3>
-                <p><?= $this->tr('You always know where things are and how they behave.') ?></p>
-                <ul>
-                    <li><?= $this->tr('Consistent structure') ?></li>
-                    <li><?= $this->tr('Minimal magic') ?></li>
-                    <li><?= $this->tr('Easier debugging') ?></li>
-                </ul>
+            <div class="card">
+                <h3>Developer First</h3>
+                <p>Designed for extensibility, not opinionated constraints.</p>
             </div>
         </div>
+    </section>
 
-        <div class="home-section">
-            <h2><?= $this->tr('Simplicity over automation') ?></h2>
-            <p>
-                <?= $this->tr('Automation often hides complexity instead of removing it. RouteChasm keeps things explicit so you can reason about your system.') ?>
-            </p>
+    <section id="architecture" class="section alt">
+        <h2>Architecture Overview</h2>
+
+        <div class="architecture">
+            <div class="step">
+                <span>1</span>
+                <div>
+                    <h4>Content Layer</h4>
+                    <p>Pages, articles, and structured entities.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <span>2</span>
+                <div>
+                    <h4>Logic Layer</h4>
+                    <p>Routing, templates, and data transformations.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <span>3</span>
+                <div>
+                    <h4>System Layer</h4>
+                    <p>Database, APIs, and infrastructure services.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="home-cta">
-            <h2><?= $this->tr('Stop working around your framework') ?></h2>
-            <p><?= $this->tr('Build something that stays understandable - even after it grows.') ?></p>
+    <section class="section">
+        <h2>Use Cases</h2>
 
-            <?php if (!is_null($projectLink)): ?>
-                <a href="<?= $projectLink ?>" class="button">
-                    <?= $this->tr('Start Building with') ?>
-                    <?= $projectName ?>
-                </a>
-            <?php endif; ?>
+        <div class="list">
+            <div class="list-item">
+                <h4>Corporate Websites</h4>
+                <p>Structured multi-page systems with clear hierarchy.</p>
+            </div>
+
+            <div class="list-item">
+                <h4>Documentation Platforms</h4>
+                <p>Markdown-driven content with predictable rendering.</p>
+            </div>
+
+            <div class="list-item">
+                <h4>Internal Tools</h4>
+                <p>Admin panels and system dashboards with reusable components.</p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="cta">
+        <h2>Build structured systems instead of scattered pages</h2>
+        <button class="btn primary" onclick="scrollToTop()">Back to Top</button>
+    </section>
 </main>
 
 <?= Footer::default() ?>
