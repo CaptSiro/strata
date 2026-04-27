@@ -2,7 +2,7 @@
 
 Successor of RoutePass, a PHP Framework
 
-Documentation coming soon. 
+Documentation coming soon.
 
 In the meantime, check out `index.php` for routing examples, `src/models` for database abstraction, and `src/components` for rendering views.
 
@@ -38,7 +38,7 @@ Edit .htaccess file:
 Edit .env file. All `PROJECT_*` entries are optional as well as `ADMIN_LOGIN_PASSWORD`:
 
 ```env
-VERSION=1.0.0
+VERSION=1.0.2
 
 PROJECT=RouteChasm
 PROJECT_LINK=https://github.com/CaptSiro/route-chasm

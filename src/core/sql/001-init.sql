@@ -62,6 +62,7 @@ VALUES ('full-hd', 1, 1, 'fit', 1920, 1080),
 
 
 DROP TABLE IF EXISTS core_lexicon_translation;
+DROP TABLE IF EXISTS core_related_pages;
 DROP TABLE IF EXISTS core_external_page;
 DROP TABLE IF EXISTS core_ai_page;
 DROP TABLE IF EXISTS ext_page_meta;
@@ -210,6 +211,14 @@ CREATE TABLE IF NOT EXISTS core_page (
     INDEX (`priority`)
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `core_related_pages` (
+    `id_source` INT NOT NULL,
+    `id_target` INT NOT NULL,
+    UNIQUE (`id_source`, `id_target`),
+    FOREIGN KEY (`id_source`) REFERENCES `core_page` (`id_page`),
+    FOREIGN KEY (`id_target`) REFERENCES `core_page` (`id_page`)
+);
+
 CREATE TABLE IF NOT EXISTS core_page_localization (
     `id_localized_page` INT NOT NULL AUTO_INCREMENT,
     `id_page` INT NOT NULL,
@@ -326,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `core_user` (
 
 INSERT INTO `core_user` (id_user, username, password, tag)
 VALUES (1, 'Root', '', 'root'),
-       (2, 'Anonymous', '', 'anonymous');
+    (2, 'Anonymous', '', 'anonymous');
 
 
 

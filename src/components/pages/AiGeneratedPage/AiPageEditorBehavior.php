@@ -81,7 +81,7 @@ class AiPageEditorBehavior implements EditorBehavior {
         $samePrompt = !is_null($aiPage)
             && $aiPage->prompt === $prompt;
 
-        if (!empty($prompt) && $action === EditorBehaviorAction::UPDATE && !$samePrompt) {
+        if ($action === EditorBehaviorAction::UPDATE && !$samePrompt && !is_null($prompt)) {
             $client = OpenAi::fromEnv();
             $request = $client->createRequest();
 
