@@ -55,6 +55,13 @@ class OpenAi implements Client {
         ]);
 
         $response = curl_exec($curl);
+
+        if ($response === false) {
+            http_response_code(500);
+            var_dump(curl_getinfo($curl));
+            exit;
+        }
+
         curl_close($curl);
 
         return $response;

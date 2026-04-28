@@ -236,11 +236,18 @@ class AdminPageEditor extends AdminNexusEditor {
             $ai->add(new StructureGeneration(InputMessage::ROLE_SYSTEM, $prompt, $templates, $language));
             $ai->add(new StructureGeneration(InputMessage::ROLE_USER, $prompt, $templates, $language));
 
-            if (is_null($structure = $client->parseResponse($client->chat($ai)))) {
+            $ret = $client->chat($ai);
+            if (is_null($structure = $client->parseResponse($ret))) {
                 $response->sendMessage(
                     $this->tr('AI refused to generate structure'),
                     HttpCode::SE_INTERNAL_SERVER_ERROR
                 );
+            }
+
+            if (empty($array)) {
+                http_response_code(500);
+                var_dump($ret);
+                exit;
             }
 
             $children = [];
