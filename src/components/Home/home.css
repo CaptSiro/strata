@@ -68,9 +68,9 @@
 
 /* SECTIONS */
 .section {
-    padding: 80px var(--gap);
+    padding: var(--gap);
     max-width: var(--page-width);
-    margin: 0 auto;
+    margin: 80px auto;
 }
 
 .section h2 {
