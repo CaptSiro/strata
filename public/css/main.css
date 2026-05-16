@@ -54,12 +54,20 @@
         --gap-smaller: 8px;
         --animation-duration: 200ms;
     }
+
+    input {
+        color-scheme: light;
+    }
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+input {
+    color-scheme: dark;
 }
 
 
