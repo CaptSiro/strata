@@ -35,7 +35,9 @@ use core\sideloader\importers\Css\Css;
 use core\sideloader\importers\Javascript\Javascript;
 use core\url\Url;
 use core\utils\Arrays;
+use core\utils\Objects;
 use models\core\Language\Language;
+use models\core\Language\Lexicon\Rule;
 use models\core\Page\behavior\PageEditorBehavior;
 use models\core\Page\Page;
 use models\core\Page\PageStatus;
@@ -236,18 +238,18 @@ class AdminPageEditor extends AdminNexusEditor {
             $ai->add(new StructureGeneration(InputMessage::ROLE_SYSTEM, $prompt, $templates, $language));
             $ai->add(new StructureGeneration(InputMessage::ROLE_USER, $prompt, $templates, $language));
 
-            $ret = $client->chat($ai);
-            if (is_null($structure = $client->parseResponse($ret))) {
+            if (is_null($structure = $client->parseResponse($client->chat($ai)))) {
                 $response->sendMessage(
                     $this->tr('AI refused to generate structure'),
                     HttpCode::SE_INTERNAL_SERVER_ERROR
                 );
             }
 
-            if (empty($array)) {
-                http_response_code(500);
-                var_dump($ret);
-                exit;
+            if (empty($structure)) {
+                $response->sendMessage(
+                    $this->trt('Could not connect to AI client. (Using: {})', Objects::getClass($client)),
+                    HttpCode::SE_INTERNAL_SERVER_ERROR
+                );
             }
 
             $children = [];
