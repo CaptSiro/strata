@@ -41,6 +41,9 @@ class Form extends Component implements Layout, Attribute {
         Css::import(Form::getStaticResource('form.css'));
         Javascript::import(Form::getStaticResource('form.js'));
 
+        Select::importAssets();
+        MultiSelect::importAssets();
+
         return true;
     }
 
